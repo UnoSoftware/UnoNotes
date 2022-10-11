@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "816098234962",
+    "project_id": "unonotes-98206",
+    "storage_bucket": "unonotes-98206.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:816098234962:android:37f00bbdc9ab7115ef058b",
+        "android_client_info": {
+          "package_name": "com.astra.notes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "816098234962-8kpf4p71id2v9fmj8o9ih8p0scbljrj3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfvro6w32Vornjbq3kwEQjztetSOgnHUY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "816098234962-8kpf4p71id2v9fmj8o9ih8p0scbljrj3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
