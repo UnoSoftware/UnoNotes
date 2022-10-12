@@ -11,8 +11,13 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.firestore.FirebaseFirestore
+import org.w3c.dom.Text
 
 class MainActivity : AppCompatActivity() {
+
+    private val db = FirebaseFirestore.getInstance()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -29,7 +34,13 @@ class MainActivity : AppCompatActivity() {
         if (changed == true){
             var color = intent.getStringExtra("color").toString()
         }
-        cardview_1.setCardBackgroundColor(Color.parseColor(color))
+
+        db.collection("Notes").document("PZUQD2hGEfqxQiPFJ3nZ").get().addOnSuccessListener {
+            val Title: TextView = findViewById(R.id.titulo_tv)
+            Title.setText(it.get("Name").toString())
+        }
+
+        //cardview_1.setCardBackgroundColor(Color.parseColor(color))
 
         edit_color.setOnClickListener {
             val intent = Intent(this, ChangeColorActivity::class.java)
