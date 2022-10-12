@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Notes</string>
+    <string name="email">Email</string>
+    <string name="sign_in">SIGN IN</string>
+    <string name="password">Password</string>
+    <string name="access">ACCESS</string>
+    <string name="login">login</string>
+    <string name="you_don_t_have_an_account_yet_sign_up_now">You don\'t have an account yet? Sign up now!</string>
 </resources>

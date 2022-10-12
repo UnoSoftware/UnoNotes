@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="#191919"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_in"
+        android:textColor="@color/white"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="143dp"
+        tools:layout_editor_absoluteY="79dp"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/Email"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="@string/email"
+        android:background="#30fffffa"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:drawableStart="@drawable/ic_baseline_person_outline_24"
+        android:drawablePadding="10dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="193dp"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#30fffffa"
+        android:drawableStart="@drawable/ic_baseline_key_24"
+        android:drawablePadding="10dp"
+        android:hint="@string/password"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="253dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:id="@+id/loginbtn"
+        android:text="@string/login"
+        android:backgroundTint="#CB0900"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp"
+        tools:layout_editor_absoluteX="-16dp"
+        tools:layout_editor_absoluteY="340dp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/noaccount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/you_don_t_have_an_account_yet_sign_up_now"
+        android:textColor="@color/white"
+        android:textAlignment="center"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        tools:layout_editor_absoluteX="-16dp"
+        tools:layout_editor_absoluteY="473dp"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="128dp"
+        android:layout_height="392dp"
+        app:srcCompat="@drawable/whatsapp_image_2022_09_27_at_5_19_02_pm__1_"
+        tools:layout_editor_absoluteX="140dp"
+        tools:layout_editor_absoluteY="492dp"
+        tools:ignore="MissingConstraints" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
