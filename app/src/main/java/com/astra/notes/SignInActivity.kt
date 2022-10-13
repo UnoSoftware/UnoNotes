@@ -1,6 +1,5 @@
 ﻿package com.astra.notes
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -8,11 +7,10 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import kotlin.math.sign
 
 class SignInActivity : AppCompatActivity() {
 
@@ -33,8 +31,15 @@ class SignInActivity : AppCompatActivity() {
         auth = Firebase.auth
 
         loginbtn.setOnClickListener {
+            if (email.text.toString().isEmpty() || password.text.toString().isEmpty()) {
+                Toast.makeText(this, "Please fill in both fields", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             auth.signInWithEmailAndPassword(email.text.toString(), password.text.toString()).addOnCompleteListener {
-                if (it.isSuccessful) load()
+                if (it.isSuccessful) {
+                    val user = auth.currentUser
+                    load(user)
+                }
                 else {
                     Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
                 }
@@ -51,13 +56,13 @@ class SignInActivity : AppCompatActivity() {
     //Ver si alguien ya tiene la sesión iniciada
     public override fun onStart() {
         super.onStart()
-        val currentUser = auth.currentUser
-        if (currentUser != null) {
-            load();
+        val user = auth.currentUser
+        if (user != null) {
+            load(user);
         }
     }
 
-    private fun load() {
+    private fun load(user: FirebaseUser?) {
         Toast.makeText(this, "Authentication successful", Toast.LENGTH_SHORT).show()
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
