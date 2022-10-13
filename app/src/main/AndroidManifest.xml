@@ -14,6 +14,9 @@
         android:theme="@style/Theme.Notes"
         tools:targetApi="31">
         <activity
+            android:name=".NotesViewActivity"
+            android:exported="false" />
+        <activity
             android:name=".SignInActivity"
             android:exported="true" />
         <activity
