@@ -18,11 +18,17 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.view.*
 
 class MainActivity : AppCompatActivity() {
+
     private val db = FirebaseFirestore.getInstance()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         var add_btn: FloatingActionButton = findViewById(R.id.floatingActionButton)
+        add_btn.setOnClickListener {
+            val intent = Intent(this, CreateNote::class.java)
+            startActivity(intent)
+        }
 
         db.collection("Notes").get().addOnSuccessListener { notes ->
             var ids_documentos: MutableList<String> = mutableListOf()
@@ -31,7 +37,7 @@ class MainActivity : AppCompatActivity() {
             var products: MutableList<ArrayList<String>> = mutableListOf()
             var amounts: MutableList<ArrayList<Int>> = mutableListOf()
             var T = 0
-            for (note in notes.reversed()) {
+            for (note in notes) {
                 T += 1
                 ids_documentos.add(note.id)
             }
