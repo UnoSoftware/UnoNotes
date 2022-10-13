@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
                     rv.apply{
                         setHasFixedSize(true)
                         layoutManager = LinearLayoutManager(this@MainActivity)
-                        adapter = NoteAdapter(this@MainActivity, names, subtitles, products, amounts)
+                        adapter = NoteAdapter(this@MainActivity, names, subtitles, products, amounts, i)
 
                     }
                 }
