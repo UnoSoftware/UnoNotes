@@ -10,37 +10,51 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.firestore.FirebaseFirestore
 import org.w3c.dom.Text
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.view.*
 
 class MainActivity : AppCompatActivity() {
+
     private val db = FirebaseFirestore.getInstance()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        var cardview_1: CardView = findViewById(R.id.CardView)
         var add_btn: FloatingActionButton = findViewById(R.id.floatingActionButton)
-        var edit_color: ImageButton = findViewById(R.id.edit_color_btn)
         add_btn.setOnClickListener {
-            cardview_1.setVisibility(View.VISIBLE)
-        }
-        var changed = intent.getStringExtra("changed").toBoolean()
-        val intent = Intent(this, this::class.java)
-        intent.putExtra("color", "#FFFFFF")
-        if (changed == true){
-            var color = intent.getStringExtra("color").toString()
-        }
-        db.collection("Notes").document("PZUQD2hGEfqxQiPFJ3nZ").get().addOnSuccessListener {
-            val Title: TextView = findViewById(R.id.titulo_tv)
-            Title.setText(it.get("Name").toString())
-        }
-        //cardview_1.setCardBackgroundColor(Color.parseColor(color))
-
-        edit_color.setOnClickListener {
-            val intent = Intent(this, ChangeColorActivity::class.java)
+            val intent = Intent(this, CreateNote::class.java)
             startActivity(intent)
+        }
+
+        db.collection("Notes").get().addOnSuccessListener { notes ->
+            var ids_documentos: MutableList<String> = mutableListOf()
+            var names: MutableList<String> = mutableListOf()
+            var subtitles: MutableList<String> = mutableListOf()
+            var products: MutableList<ArrayList<String>> = mutableListOf()
+            var amounts: MutableList<ArrayList<Int>> = mutableListOf()
+            var T = 0
+            for (note in notes) {
+                T += 1
+                ids_documentos.add(note.id)
+            }
+            for (i in ids_documentos) {
+                db.collection("Notes").document(i).get().addOnSuccessListener {
+                    names.add(it.get("Name") as String)
+                    subtitles.add(it.get("Subtitle") as String)
+                    products.add(it.get("Products") as ArrayList<String>)
+                    amounts.add(it.get("Amount") as ArrayList<Int>)
+                    rv.apply{
+                        setHasFixedSize(true)
+                        layoutManager = LinearLayoutManager(this@MainActivity)
+                        adapter = NoteAdapter(this@MainActivity, names, subtitles, products, amounts, i)
+
+                    }
+                }
+            }
         }
     }
 }
