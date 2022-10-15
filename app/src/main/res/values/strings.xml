@@ -6,4 +6,6 @@
     <string name="access">ACCESS</string>
     <string name="login">login</string>
     <string name="you_don_t_have_an_account_yet_sign_up_now">You don\'t have an account yet? Sign up now!</string>
+    <string name="todo">TODO</string>
+    <string name="logo">LOGO</string>
 </resources>

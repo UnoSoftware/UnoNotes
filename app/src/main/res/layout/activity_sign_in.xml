@@ -107,7 +107,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/noaccount"
-        app:srcCompat="@drawable/whatsapp_image_2022_09_27_at_5_19_02_pm__1_"
-        tools:ignore="MissingConstraints" />
+        app:srcCompat="@drawable/logo_white"
+        tools:ignore="MissingConstraints"
+        android:contentDescription="@string/logo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
