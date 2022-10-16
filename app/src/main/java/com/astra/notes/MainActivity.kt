@@ -14,25 +14,26 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+            super.onCreate(savedInstanceState)
+            setContentView(R.layout.activity_main)
 
-        var cardview_1: CardView = findViewById(R.id.CardView)
-        var add_btn: FloatingActionButton = findViewById(R.id.floatingActionButton)
-        var edit_color: ImageButton = findViewById(R.id.edit_color_btn)
-        add_btn.setOnClickListener {
-            cardview_1.setVisibility(View.VISIBLE)
-        }
-        var changed = intent.getStringExtra("changed").toBoolean()
-        val intent = Intent(this, this::class.java)
-        intent.putExtra("color", "#FFFFFF")
-        if (changed == true){
-            var color = intent.getStringExtra("color").toString()
-        }
-        cardview_1.setCardBackgroundColor(Color.parseColor(color))
+            var cardview_1: CardView = findViewById(R.id.CardView)
+            var add_btn: FloatingActionButton = findViewById(R.id.floatingActionButton)
+            var edit_color: ImageButton = findViewById(R.id.edit_color_btn)
+            add_btn.setOnClickListener {
+                cardview_1.setVisibility(View.VISIBLE)
+            }
+            var changed = intent.getStringExtra("changed").toBoolean()
+            val intent = Intent(this, this::class.java)
+            intent.putExtra("color", "#FFFFFF")
 
-        edit_color.setOnClickListener {
-            val intent = Intent(this, ChangeColorActivity::class.java)
+            if (changed == true) {
+                var color = intent.getStringExtra("color").toString()
+                cardview_1.setCardBackgroundColor(Color.parseColor(color))
+            }
+
+            edit_color.setOnClickListener {
+                val intent = Intent(this, ChangeColorActivity::class.java)
             startActivity(intent)
         }
     }
