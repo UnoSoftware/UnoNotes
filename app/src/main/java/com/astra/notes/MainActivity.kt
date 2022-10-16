@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
     private val db = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         var add_btn: FloatingActionButton = findViewById(R.id.floatingActionButton)
