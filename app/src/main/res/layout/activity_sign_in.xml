@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="79dp"
         android:layout_marginBottom="67dp"
-        android:text="@string/sign_in"
+        android:text="Inicio de Sesión"
         android:textColor="@color/white"
         android:textSize="35sp"
         android:textStyle="bold"
@@ -55,15 +55,15 @@
         android:background="#30fffffa"
         android:drawableStart="@drawable/ic_baseline_key_24"
         android:drawablePadding="10dp"
-        android:hint="@string/password"
+        android:hint="Contraseña"
+        android:inputType="textPassword"
+        android:maxLines="1"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/loginbtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Email"
-        android:inputType="textPassword"
-        android:maxLines="1"
         tools:ignore="MissingConstraints" />
 
     <com.google.android.material.button.MaterialButton
@@ -75,7 +75,7 @@
         android:layout_marginEnd="60dp"
         android:layout_marginBottom="63dp"
         android:backgroundTint="#CB0900"
-        android:text="@string/login"
+        android:text="ACCEDER"
         app:layout_constraintBottom_toTopOf="@+id/noaccount"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -90,7 +90,7 @@
         android:layout_marginBottom="10dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:text="@string/you_don_t_have_an_account_yet_sign_up_now"
+        android:text="No tienes cuenta? Registrate!"
         android:textAlignment="center"
         android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/imageView2"
@@ -103,12 +103,13 @@
         android:id="@+id/imageView2"
         android:layout_width="128dp"
         android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:contentDescription="@string/logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/noaccount"
         app:srcCompat="@drawable/logo_white"
-        tools:ignore="MissingConstraints"
-        android:contentDescription="@string/logo" />
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -81,8 +81,10 @@ vuelva a intentar el registro más tarde." />
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20pt"
             android:layout_marginTop="10pt"
+            android:background="#FF0000"
             android:minHeight="55dp"
-            android:text="Registrarse" />
+            android:text="Registrarse"
+            app:backgroundTint="#FF0000" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
