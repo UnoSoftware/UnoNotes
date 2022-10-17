@@ -14,6 +14,7 @@
         android:backgroundTint="#F88B39"
         android:text="SAVE"
         android:textColor="#000000"
+        app:fontFamily="@font/c"
         app:layout_constraintEnd_toEndOf="@+id/CardView"
         app:layout_constraintTop_toBottomOf="@+id/CardView" />
 
@@ -57,7 +58,9 @@
                 android:layout_marginTop="8dp"
                 android:text="Titulo Nota"
                 android:textColor="#000000"
+                android:textSize="16sp"
                 android:textStyle="bold"
+                app:fontFamily="@font/c"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -67,7 +70,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:text="TextView"
-                android:textColor="#606060"
+                android:textColor="#333333"
+                android:textSize="16sp"
+                app:fontFamily="@font/b"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/title_tv" />
 
