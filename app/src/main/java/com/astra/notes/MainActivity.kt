@@ -26,22 +26,24 @@ class MainActivity : AppCompatActivity() {
 
     private val auth = FirebaseAuth.getInstance()
 
+    private val currentUser = auth.currentUser
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        var add_btn: FloatingActionButton = findViewById(R.id.floatingActionButton)
+        val add_btn: FloatingActionButton = findViewById(R.id.floatingActionButton)
         add_btn.setOnClickListener {
             val intent = Intent(this, CreateNote::class.java)
             startActivity(intent)
         }
 
         db.collection("Notes").get().addOnSuccessListener { notes ->
-            var ids_documentos: MutableList<String> = mutableListOf()
-            var names: MutableList<String> = mutableListOf()
-            var subtitles: MutableList<String> = mutableListOf()
-            var products: MutableList<ArrayList<String>> = mutableListOf()
-            var amounts: MutableList<ArrayList<Int>> = mutableListOf()
+            val ids_documentos: MutableList<String> = mutableListOf()
+            val names: MutableList<String> = mutableListOf()
+            val subtitles: MutableList<String> = mutableListOf()
+            val products: MutableList<ArrayList<String>> = mutableListOf()
+            val amounts: MutableList<ArrayList<Int>> = mutableListOf()
             var T = 0
             for (note in notes) {
                 T += 1
@@ -49,15 +51,21 @@ class MainActivity : AppCompatActivity() {
             }
             for (i in ids_documentos) {
                 db.collection("Notes").document(i).get().addOnSuccessListener {
-                    names.add(it.get("Name") as String)
-                    subtitles.add(it.get("Subtitle") as String)
-                    products.add(it.get("Products") as ArrayList<String>)
-                    amounts.add(it.get("Amount") as ArrayList<Int>)
-                    rv.apply{
+                    if (it.get("UserID") == currentUser?.uid) {  // Solo se muestran las notas del usuario actual
+                        names.add(it.get("Name").toString())
+                        subtitles.add(it.get("Subtitle").toString())
+                        products.add(it.get("Products") as ArrayList<String>)
+                        amounts.add(it.get("Amounts") as ArrayList<Int>)
+                        rv.apply{
                         setHasFixedSize(true)
                         layoutManager = LinearLayoutManager(this@MainActivity)
                         adapter = NoteAdapter(this@MainActivity, names, subtitles, products, amounts, i)
-
+                        }
+                    } else {
+                        T -= 1
+                    }
+                    if (T == 0) {
+                        continue  // Si no hay notas, podríamos mostrar un mensaje
                     }
                 }
             }

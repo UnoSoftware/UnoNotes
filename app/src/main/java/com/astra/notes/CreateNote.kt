@@ -13,6 +13,10 @@ class CreateNote : AppCompatActivity() {
 
     private val db = FirebaseFirestore.getInstance()
 
+    private val auth = FirebaseAuth.getInstance()
+
+    private val currentUser = auth.currentUser
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_note)
@@ -28,7 +32,8 @@ class CreateNote : AppCompatActivity() {
                 "Name" to noteName,
                 "Subtitle" to noteSubtitle,
                 "Products" to products,
-                "Amount" to amount
+                "Amount" to amount,
+                "UserID" to currentUser?.uid  // Se guarda el ID del usuario que crea la nota
             )
 
             db.collection("Notes").add(note)
