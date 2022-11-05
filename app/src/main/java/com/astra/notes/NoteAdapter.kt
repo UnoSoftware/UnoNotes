@@ -6,11 +6,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
-import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.card_notes.view.*
 
 class NoteAdapter(private val activity: Activity, private val names: MutableList<String>, private val subitles: MutableList<String>,
-                  private val products: MutableList<ArrayList<String>>, private val amounts: MutableList<ArrayList<Int>>, private val id: String)
+                  private val products: MutableList<ArrayList<String>>, private val amounts: MutableList<ArrayList<Int>>, private val id: Int
+)
     : RecyclerView.Adapter<NoteAdapter.ViewHolder>() {
 
     class ViewHolder(val layout: View) : RecyclerView.ViewHolder(layout)

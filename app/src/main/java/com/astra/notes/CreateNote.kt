@@ -28,7 +28,7 @@ class CreateNote : AppCompatActivity() {
             val noteName = title_tv.text.toString()
             val noteSubtitle = subtitle_tv.text.toString()
             val products: ArrayList<String> = arrayListOf()
-            var amount: ArrayList<Int> = arrayListOf()
+            val amount: ArrayList<Int> = arrayListOf()
             val note = hashMapOf(
                 "Name" to noteName,
                 "Subtitle" to noteSubtitle,

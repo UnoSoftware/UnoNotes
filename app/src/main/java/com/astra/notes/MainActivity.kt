@@ -1,32 +1,21 @@
 package com.astra.notes
 
 import android.content.Intent
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.widget.CheckBox
-import android.widget.ImageButton
-import android.widget.TextView
-import androidx.cardview.widget.CardView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import org.w3c.dom.Text
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.view.*
 
 class MainActivity : AppCompatActivity() {
 
     private val db = FirebaseFirestore.getInstance()
 
     private val auth = FirebaseAuth.getInstance()
-
-    private val currentUser = auth.currentUser
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -44,27 +33,25 @@ class MainActivity : AppCompatActivity() {
             val subtitles: MutableList<String> = mutableListOf()
             val products: MutableList<ArrayList<String>> = mutableListOf()
             val amounts: MutableList<ArrayList<Int>> = mutableListOf()
+            val currentUserId = auth.currentUser?.uid
             var T = 0
             for (note in notes) {
                 T += 1
                 ids_documentos.add(note.id)
             }
-            for (i in ids_documentos) {
-                db.collection("Notes").document(i).get().addOnSuccessListener {
-                    if (it.get("UserID") == currentUser?.uid) {  // Solo se muestran las notas del usuario actual
-                        names.add(it.get("Name").toString())
-                        subtitles.add(it.get("Subtitle").toString())
-                        products.add(it.get("Products") as ArrayList<String>)
-                        amounts.add(it.get("Amounts") as ArrayList<Int>)
+            for (i in 0 until T) {
+                db.collection("Notes").document(ids_documentos[i]).get().addOnSuccessListener { note ->
+                    if (note.get("UserID") == currentUserId) {
+                        names.add(note.get("Name") as String)
+                        subtitles.add(note.get("Subtitle") as String)
+                        products.add(note.get("Products") as ArrayList<String>)
+                        amounts.add(note.get("Amount") as ArrayList<Int>)
                         rv.apply{
-                        setHasFixedSize(true)
-                        layoutManager = LinearLayoutManager(this@MainActivity)
-                        adapter = NoteAdapter(this@MainActivity, names, subtitles, products, amounts, i)
+                            setHasFixedSize(true)
+                            layoutManager = LinearLayoutManager(this@MainActivity)
+                            adapter = NoteAdapter(this@MainActivity, names, subtitles, products, amounts, i)
                         }
-                    } else {
-                        T -= 1
                     }
-                    // Si no hay notas, podríamos mostrar un mensaje
                 }
             }
         }

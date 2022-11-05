@@ -1,5 +1,6 @@
 package com.astra.notes
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -46,7 +47,9 @@ class RegisterActivity : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     errorMessage.visibility = View.GONE
-                    // Go to sign in
+                    val user = auth.currentUser
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
                 } else {
                     errorMessage.visibility = View.VISIBLE
                     // Show error
