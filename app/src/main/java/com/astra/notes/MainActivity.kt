@@ -64,9 +64,7 @@ class MainActivity : AppCompatActivity() {
                     } else {
                         T -= 1
                     }
-                    if (T == 0) {
-                        continue  // Si no hay notas, podríamos mostrar un mensaje
-                    }
+                    // Si no hay notas, podríamos mostrar un mensaje
                 }
             }
         }
