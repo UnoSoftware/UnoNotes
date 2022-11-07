@@ -4,8 +4,12 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import com.google.firebase.firestore.FirebaseFirestore
 
 class ChangeColorActivity : AppCompatActivity() {
+
+    private val db = FirebaseFirestore.getInstance()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_change_color)
@@ -14,27 +18,79 @@ class ChangeColorActivity : AppCompatActivity() {
         var Blue: Button = findViewById(R.id.blue_btn)
         var Yellow: Button = findViewById(R.id.yellow_btn)
         var Green: Button = findViewById(R.id.green_btn)
+        val extras = intent.extras
+        val noteId = extras?.getString("id")
+        val noteName = extras?.getString("name")
+        val noteSubtitle = extras?.getString("subtitle")
+        val products = extras?.get("products") as ArrayList<String>
+        val amounts = extras.get("amounts") as ArrayList<String>
 
         Red.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("color", "#CB0900")
-            startActivity(intent)
+            db.collection("Notes").document("$noteId").update("Color", "#CB0900")
+            .addOnSuccessListener {
+                val intent = Intent(this, NotesViewActivity::class.java)
+                intent.putExtra("name", noteName)
+                intent.putExtra("subtitle", noteSubtitle)
+                intent.putExtra("products", products)
+                intent.putExtra("amounts", amounts)
+                intent.putExtra("color", "#CB0900")
+                intent.putExtra("id", noteId)
+                startActivity(intent)
+            }
+            .addOnFailureListener {
+                Utils.showError(this, it.message.toString())
+            }
         }
+
         Blue.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("color", "#074AA3")
-            startActivity(intent)
+            db.collection("Notes").document("$noteId").update("Color", "#074AA3")
+                .addOnSuccessListener {
+                    val intent = Intent(this, NotesViewActivity::class.java)
+                    intent.putExtra("name", noteName)
+                    intent.putExtra("subtitle", noteSubtitle)
+                    intent.putExtra("products", products)
+                    intent.putExtra("amounts", amounts)
+                    intent.putExtra("color", "#074AA3")
+                    intent.putExtra("id", noteId)
+                    startActivity(intent)
+                }
+                .addOnFailureListener {
+                    Utils.showError(this, it.message.toString())
+                }
         }
+
         Yellow.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("color", "#F0D804")
-            startActivity(intent)
+            db.collection("Notes").document("$noteId").update("Color", "#F0D804")
+                .addOnSuccessListener {
+                    val intent = Intent(this, NotesViewActivity::class.java)
+                    intent.putExtra("name", noteName)
+                    intent.putExtra("subtitle", noteSubtitle)
+                    intent.putExtra("products", products)
+                    intent.putExtra("amounts", amounts)
+                    intent.putExtra("color", "#F0D804")
+                    intent.putExtra("id", noteId)
+                    startActivity(intent)
+                }
+                .addOnFailureListener {
+                    Utils.showError(this, it.message.toString())
+                }
         }
+
         Green.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("color", "#328A10")
-            intent.putExtra("changed", true)
-            startActivity(intent)
+            db.collection("Notes").document("$noteId").update("Color", "#328A10")
+                .addOnSuccessListener {
+                    val intent = Intent(this, NotesViewActivity::class.java)
+                    intent.putExtra("name", noteName)
+                    intent.putExtra("subtitle", noteSubtitle)
+                    intent.putExtra("products", products)
+                    intent.putExtra("amounts", amounts)
+                    intent.putExtra("color", "#328A10")
+                    intent.putExtra("id", noteId)
+                    startActivity(intent)
+                }
+                .addOnFailureListener {
+                    Utils.showError(this, it.message.toString())
+                }
         }
 
     }

@@ -30,10 +30,11 @@ class CreateNote : AppCompatActivity() {
             val products: ArrayList<String> = arrayListOf()
             val amount: ArrayList<Int> = arrayListOf()
             val note = hashMapOf(
-                "Name" to noteName,
-                "Subtitle" to noteSubtitle,
-                "Products" to products,
-                "Amount" to amount,
+                "Name" to noteName,  // Guarda el nombre de la nota
+                "Subtitle" to noteSubtitle,  // Guarda la descripcion de la nota
+                "Products" to products,   // Guarda el Array de productos de la nota
+                "Amount" to amount,   // Guarda el Array de cantidades de la nota
+                "Color" to "#F88B39", // Guarda el Color por defecto para la nota
                 "UserID" to currentUser?.uid  // Se guarda el ID del usuario que crea la nota
             )
 
@@ -43,7 +44,7 @@ class CreateNote : AppCompatActivity() {
                     startActivity(intent)
                 }
                 .addOnFailureListener{
-                    Utils.showError(this, it.message.toString())
+                    Utils.showError(this, it.message.toString()) // Si se produce un error al guardar muestra el fallo
                 }
         }
     }

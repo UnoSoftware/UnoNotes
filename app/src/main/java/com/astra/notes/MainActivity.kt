@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -27,33 +28,56 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        db.collection("Notes").get().addOnSuccessListener { notes ->
-            val ids_documentos: MutableList<String> = mutableListOf()
-            val names: MutableList<String> = mutableListOf()
-            val subtitles: MutableList<String> = mutableListOf()
-            val products: MutableList<ArrayList<String>> = mutableListOf()
-            val amounts: MutableList<ArrayList<Int>> = mutableListOf()
-            val currentUserId = auth.currentUser?.uid
-            var T = 0
-            for (note in notes) {
-                T += 1
-                ids_documentos.add(note.id)
-            }
-            for (i in 0 until T) {
-                db.collection("Notes").document(ids_documentos[i]).get().addOnSuccessListener { note ->
-                    if (note.get("UserID") == currentUserId) {
-                        names.add(note.get("Name") as String)
-                        subtitles.add(note.get("Subtitle") as String)
-                        products.add(note.get("Products") as ArrayList<String>)
-                        amounts.add(note.get("Amount") as ArrayList<Int>)
-                        rv.apply{
-                            setHasFixedSize(true)
-                            layoutManager = LinearLayoutManager(this@MainActivity)
-                            adapter = NoteAdapter(this@MainActivity, names, subtitles, products, amounts, i)
+        val swipeRefresh: SwipeRefreshLayout = findViewById(R.id.swrly)
+
+        fun load() {
+            db.collection("Notes").get().addOnSuccessListener { notes ->
+                val ids_documentos: MutableList<String> = mutableListOf()
+                val names: MutableList<String> = mutableListOf()
+                val subtitles: MutableList<String> = mutableListOf()
+                val colors: MutableList<String> = mutableListOf()
+                val products: MutableList<ArrayList<String>> = mutableListOf()
+                val amounts: MutableList<ArrayList<Int>> = mutableListOf()
+                val currentUserId = auth.currentUser?.uid
+                var T = 0
+                for (note in notes) {
+                    T += 1
+                    ids_documentos.add(note.id)
+                }
+                var ids_documentos_final: MutableList<String> = mutableListOf()
+                for (i in 0 until T) {
+                    db.collection("Notes").document(ids_documentos[i]).get()
+                        .addOnSuccessListener { note ->
+                            if (note.get("UserID") == currentUserId) {
+                                ids_documentos_final.add(ids_documentos[i])
+                                names.add(note.get("Name") as String)
+                                colors.add(note.get("Color") as String)
+                                subtitles.add(note.get("Subtitle") as String)
+                                products.add(note.get("Products") as ArrayList<String>)
+                                amounts.add(note.get("Amount") as ArrayList<Int>)
+                                rv.apply {
+                                    setHasFixedSize(true)
+                                    layoutManager = LinearLayoutManager(this@MainActivity)
+                                    adapter = NoteAdapter(
+                                        this@MainActivity,
+                                        names,
+                                        subtitles,
+                                        colors,
+                                        products,
+                                        amounts,
+                                        i,
+                                        ids_documentos_final
+                                    )
+                                }
+                            }
                         }
-                    }
                 }
             }
+        }
+        load()
+        swipeRefresh.setOnRefreshListener {
+            load()
+            swipeRefresh.isRefreshing = false
         }
     }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
