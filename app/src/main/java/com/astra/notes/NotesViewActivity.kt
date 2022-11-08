@@ -26,6 +26,7 @@ class NotesViewActivity : AppCompatActivity() {
         val noteSubtitle = extras.getString("subtitle")
         val id = extras.getString("id")
         val color = extras.getString("color")
+        val userID = extras.getString("iduser")
         val products = extras.get("products") as ArrayList<String>
         val amounts = extras.get("amounts") as ArrayList<Int>
         val change_color_btn: ImageButton = findViewById(R.id.change_color_btn)
@@ -56,6 +57,7 @@ class NotesViewActivity : AppCompatActivity() {
             intent.putExtra("amounts", amounts)
             intent.putExtra("color", color)
             intent.putExtra("id", id)
+            intent.putExtra("iduser", userID)
             startActivity(intent)
         }
 
@@ -76,7 +78,8 @@ class NotesViewActivity : AppCompatActivity() {
                 "Subtitle" to noteSubtitle,
                 "Products" to products,
                 "Amount" to amounts,
-                "Color" to color
+                "Color" to color,
+                "UserID" to userID
             )
             db.collection("Notes").document(id!!).set(note)
                 .addOnSuccessListener {

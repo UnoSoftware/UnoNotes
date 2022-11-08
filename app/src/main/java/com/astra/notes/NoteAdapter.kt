@@ -13,7 +13,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.card_notes.view.*
 
 class NoteAdapter(private val activity: Activity, private val names: MutableList<String>, private val subitles: MutableList<String>, private val colors: MutableList<String>,
-                  private val products: MutableList<ArrayList<String>>, private val amounts: MutableList<ArrayList<Int>>, private val id: Int, private val idsnotas: MutableList<String>
+                  private val products: MutableList<ArrayList<String>>, private val amounts: MutableList<ArrayList<Int>>, private val id: Int, private val idsnotas: MutableList<String>, private val currentUserId: String
 )
     : RecyclerView.Adapter<NoteAdapter.ViewHolder>() {
 
@@ -77,6 +77,7 @@ class NoteAdapter(private val activity: Activity, private val names: MutableList
             intent.putExtra("products", products_temp)
             intent.putExtra("amounts", amounts_temp)
             intent.putExtra("id", id2)
+            intent.putExtra("iduser", currentUserId)
             activity.startActivity(intent)
         }
     }
