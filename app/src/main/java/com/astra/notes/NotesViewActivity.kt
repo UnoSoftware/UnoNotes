@@ -26,7 +26,7 @@ class NotesViewActivity : AppCompatActivity() {
         val id = extras.getString("id")
         val color = extras.getString("color")
         val products = extras.get("products") as ArrayList<String>
-        val amounts = extras.get("amounts") as ArrayList<String>
+        val amounts = extras.get("amounts") as ArrayList<Int>
         val change_color_btn: ImageButton = findViewById(R.id.change_color_btn)
         val card_vw: MaterialCardView = findViewById(R.id.CardView)
 
@@ -42,7 +42,7 @@ class NotesViewActivity : AppCompatActivity() {
 
         add_btn.setOnClickListener {
             products.add("")
-            amounts.add("")
+            amounts.add(1)
             val intent = Intent(this, NotesViewActivity::class.java)
             intent.putExtra("name", noteName)
             intent.putExtra("subtitle", noteSubtitle)
@@ -69,17 +69,16 @@ class NotesViewActivity : AppCompatActivity() {
                 "Name" to noteName,
                 "Subtitle" to noteSubtitle,
                 "Products" to products,
-                "Amount" to amounts
+                "Amount" to amounts,
+                "Color" to color
             )
-
-            db.collection("Notes").document("$id").set(note)
+            db.collection("Notes").document(id!!).set(note)
                 .addOnSuccessListener {
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
+                    Toast.makeText(this, "Changes saved", Toast.LENGTH_SHORT).show()
                 }
                 .addOnFailureListener{
                     Utils.showError(this, it.message.toString())
                 }
-        }
+        } 
     }
 }
