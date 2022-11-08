@@ -40,6 +40,11 @@ class NotesViewActivity : AppCompatActivity() {
             adapter = ProductAdapter(this@NotesViewActivity, products, amounts as ArrayList<Long>) // Llama al recyclerview de los productos
         }
 
+        imageView4.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+
         add_btn.setOnClickListener {
             products.add("")
             amounts.add(1)
