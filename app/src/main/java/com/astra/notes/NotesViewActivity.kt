@@ -21,8 +21,8 @@ class NotesViewActivity : AppCompatActivity() {
         setContentView(R.layout.activity_notes_view)
 
         val extras = intent.extras
-        val noteName = extras!!.getString("name")
-        val noteSubtitle = extras.getString("subtitle")
+        var noteName = extras!!.getString("name")
+        var noteSubtitle = extras.getString("subtitle")
         val id = extras.getString("id")
         val color = extras.getString("color")
         val products = extras.get("products") as ArrayList<String>
@@ -70,6 +70,8 @@ class NotesViewActivity : AppCompatActivity() {
         }
 
         save_btn.setOnClickListener {
+            noteName = title_tv.text.toString()
+            noteSubtitle = subtitle_tv.text.toString()
             val note = hashMapOf(
                 "Name" to noteName,
                 "Subtitle" to noteSubtitle,
