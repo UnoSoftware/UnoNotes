@@ -66,8 +66,7 @@ class MainActivity : AppCompatActivity() {
                                         products,
                                         amounts,
                                         i,
-                                        ids_documentos_final,
-                                        currentUserId.toString()
+                                        ids_documentos_final
                                     )
                                 }
                             }

@@ -13,14 +13,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="#191919">
+        android:background="@color/background">
 
         <TextView
             android:id="@+id/register_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Registro"
-            android:textColor="@color/white"
+            android:textColor="@color/text"
             android:textSize="14pt"
             android:layout_margin="20pt" />
 
@@ -28,7 +28,7 @@
             android:id="@+id/register_email_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
+            android:textColor="@color/text"
             android:layout_marginHorizontal="20pt"
             android:layout_marginVertical="2pt"
             android:text="Email" />
@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20pt"
             android:layout_marginVertical="5pt"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="@color/text"
             android:ems="10"
             android:inputType="textPersonName"
             android:minHeight="48dp"
@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20pt"
             android:layout_marginVertical="2pt"
-            android:textColor="@color/white"
+            android:textColor="@color/text"
             android:text="Contraseña" />
 
         <EditText
@@ -60,7 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20pt"
             android:layout_marginVertical="5pt"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="@color/text"
             android:ems="10"
             android:inputType="textPassword"
             android:minHeight="48dp"
@@ -70,7 +70,7 @@
             android:id="@+id/register_error_message"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#ff5733"
+            android:textColor="@color/text"
             android:layout_marginHorizontal="20pt"
             android:text="Ha ocurrido un error de procesamiento, por favor
 vuelva a intentar el registro más tarde." />

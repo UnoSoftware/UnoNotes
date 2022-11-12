@@ -4,19 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#191919"
+    android:background="@color/background"
     tools:context=".NotesViewActivity">
-
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="58dp"
-        android:layout_height="54dp"
-        android:layout_marginBottom="27dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/img_2"
-        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/save_btn"
@@ -34,18 +23,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
         android:visibility="visible"
         app:cardBackgroundColor="#F0D804"
         app:cardCornerRadius="10dp"
         app:cardElevation="6dp"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:strokeColor="@color/white"
-        app:strokeWidth="4dp">
+
+        app:strokeWidth="4dp"
+        app:strokeColor="@color/white">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -64,27 +53,27 @@
                 app:layout_constraintTop_toBottomOf="@+id/prod_rv"
                 app:srcCompat="@android:drawable/ic_menu_add" />
 
-            <EditText
+            <TextView
                 android:id="@+id/title_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:text="Titulo Nota"
-                android:textColor="#000000"
+                android:textColor="@color/text"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:fontFamily="@font/c"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <EditText
+            <TextView
                 android:id="@+id/subtitle_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:text="TextView"
-                android:textColor="#333333"
+                android:textColor="@color/text"
                 android:textSize="16sp"
                 app:fontFamily="@font/b"
                 app:layout_constraintStart_toStartOf="parent"
@@ -113,7 +102,6 @@
             </androidx.recyclerview.widget.RecyclerView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
     </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
