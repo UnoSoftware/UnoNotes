@@ -7,15 +7,20 @@
     tools:context=".SettingsActivity"
     android:background="#191919">
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="PROXIMAMENTE"
+    <Switch
+        android:id="@+id/switchColor"
+        android:layout_width="320dp"
+        android:layout_height="94dp"
+        android:layout_centerInParent="true"
+        android:checked="true"
+        android:text="Disable dark mode"
+        android:textAlignment="textStart"
+        android:textAllCaps="false"
         android:textColor="#FFFFFF"
-        app:fontFamily="@font/c"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="24sp"
+        android:thumbTint="#FFFFFF"
+        android:trackTint="#EDE9E9"
+        tools:checked="true"
+        tools:layout_editor_absoluteX="45dp"
+        tools:layout_editor_absoluteY="49dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
