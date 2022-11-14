@@ -5,6 +5,7 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.card.MaterialCardView
 import com.google.firebase.firestore.FirebaseFirestore
@@ -21,12 +22,13 @@ class NotesViewActivity : AppCompatActivity() {
         setContentView(R.layout.activity_notes_view)
 
         val extras = intent.extras
-        val noteName = extras!!.getString("name")
-        val noteSubtitle = extras.getString("subtitle")
+        var noteName = extras!!.getString("name")
+        var noteSubtitle = extras.getString("subtitle")
         val id = extras.getString("id")
         val color = extras.getString("color")
+        val userID = extras.getString("iduser")
         val products = extras.get("products") as ArrayList<String>
-        val amounts = extras.get("amounts") as ArrayList<String>
+        val amounts = extras.get("amounts") as ArrayList<Int>
         val change_color_btn: ImageButton = findViewById(R.id.change_color_btn)
         val card_vw: MaterialCardView = findViewById(R.id.CardView)
 
@@ -40,9 +42,14 @@ class NotesViewActivity : AppCompatActivity() {
             adapter = ProductAdapter(this@NotesViewActivity, products, amounts as ArrayList<Long>) // Llama al recyclerview de los productos
         }
 
+        imageView4.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+
         add_btn.setOnClickListener {
             products.add("")
-            amounts.add("")
+            amounts.add(1)
             val intent = Intent(this, NotesViewActivity::class.java)
             intent.putExtra("name", noteName)
             intent.putExtra("subtitle", noteSubtitle)
@@ -50,6 +57,7 @@ class NotesViewActivity : AppCompatActivity() {
             intent.putExtra("amounts", amounts)
             intent.putExtra("color", color)
             intent.putExtra("id", id)
+            intent.putExtra("iduser", userID)
             startActivity(intent)
         }
 
@@ -65,21 +73,23 @@ class NotesViewActivity : AppCompatActivity() {
         }
 
         save_btn.setOnClickListener {
+            noteName = title_tv.text.toString()
+            noteSubtitle = subtitle_tv.text.toString()
             val note = hashMapOf(
                 "Name" to noteName,
                 "Subtitle" to noteSubtitle,
                 "Products" to products,
-                "Amount" to amounts
+                "Amount" to amounts,
+                "Color" to color,
+                "UserID" to userID
             )
-
-            db.collection("Notes").document("$id").set(note)
+            db.collection("Notes").document(id!!).set(note)
                 .addOnSuccessListener {
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
+                    Toast.makeText(this, "Changes saved", Toast.LENGTH_SHORT).show()
                 }
                 .addOnFailureListener{
                     Utils.showError(this, it.message.toString())
                 }
-        }
+        } 
     }
 }

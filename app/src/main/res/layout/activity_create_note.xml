@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    android:background="#191919"
     tools:context=".CreateNote">
 
     <Button
@@ -47,7 +47,7 @@
                 android:layout_marginTop="8dp"
                 android:hint="Añade un título a tu nota"
                 android:inputType="textPersonName"
-                android:textColor="@color/text"
+                android:textColor="#000000"
                 android:textColorHint="#000000"
                 android:textStyle="bold"
                 app:fontFamily="@font/c"
@@ -62,7 +62,7 @@
                 android:layout_marginBottom="8dp"
                 android:hint="Añade una descripción de la nota"
                 android:inputType="textPersonName"
-                android:textColor="@color/text"
+                android:textColor="#606060"
                 android:textColorHint="#494949"
                 app:fontFamily="@font/b"
                 app:layout_constraintBottom_toBottomOf="parent"

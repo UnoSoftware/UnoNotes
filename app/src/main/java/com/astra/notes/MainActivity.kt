@@ -14,6 +14,10 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
+    companion object{
+        var globalDark = true
+    }
+
     private val db = FirebaseFirestore.getInstance()
 
     private val auth = FirebaseAuth.getInstance()
@@ -66,7 +70,8 @@ class MainActivity : AppCompatActivity() {
                                         products,
                                         amounts,
                                         i,
-                                        ids_documentos_final
+                                        ids_documentos_final,
+                                        currentUserId.toString()
                                     )
                                 }
                             }
