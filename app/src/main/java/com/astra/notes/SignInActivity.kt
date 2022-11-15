@@ -1,7 +1,9 @@
 ﻿package com.astra.notes
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -24,6 +26,18 @@ class SignInActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
+
+        var view = findViewById<View>(R.id.LayoutSingIn)
+        var textView = findViewById<View>(R.id.textView)
+
+        if(MainActivity.globalDark){
+            view.setBackgroundColor(Color.parseColor("#FF000000"))
+            textView.setBackgroundColor(Color.parseColor("#FFFFFFFF"))
+        }else{
+            view.setBackgroundColor(Color.parseColor("#FFFFFFFF"))
+            textView.setBackgroundColor(Color.parseColor("#FF000000"))
+        }
+
         email = findViewById(R.id.Email)
         password = findViewById(R.id.password)
         loginbtn = findViewById(R.id.loginbtn)

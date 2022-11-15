@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,6 +21,20 @@ class NotesViewActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_notes_view)
+
+        var view = findViewById<View>(R.id.LayoutNoteView)
+        var viewImageDark = findViewById<View>(R.id.imageView4)
+        var viewImageLight = findViewById<View>(R.id.imageView5)
+
+        if(MainActivity.globalDark){
+            view.setBackgroundColor(Color.parseColor("#FF000000"))
+            viewImageLight.setVisibility(View.GONE)
+            viewImageDark.setVisibility(View.VISIBLE)
+        }else{
+            view.setBackgroundColor(Color.parseColor("#FFFFFFFF"))
+            viewImageLight.setVisibility(View.VISIBLE)
+            viewImageDark.setVisibility(View.GONE)
+        }
 
         val extras = intent.extras
         var noteName = extras!!.getString("name")
@@ -43,6 +58,11 @@ class NotesViewActivity : AppCompatActivity() {
         }
 
         imageView4.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+
+        imageView5.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
