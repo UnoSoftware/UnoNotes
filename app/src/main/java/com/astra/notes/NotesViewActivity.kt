@@ -16,6 +16,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_notes_view.*
 import kotlinx.android.synthetic.main.activity_notes_view.subtitle_tv
 import kotlinx.android.synthetic.main.activity_notes_view.title_tv
+import kotlinx.android.synthetic.main.product_layout.*
 
 class NotesViewActivity : AppCompatActivity() {
 
@@ -94,6 +95,39 @@ class NotesViewActivity : AppCompatActivity() {
         }
 
         save_btn.setOnClickListener {
+            noteName = title_tv.text.toString()
+            noteSubtitle = subtitle_tv.text.toString()
+            val note = hashMapOf(
+                "Name" to noteName,
+                "Subtitle" to noteSubtitle,
+                "Products" to products,
+                "Amount" to amounts,
+                "Color" to color,
+                "UserID" to userID
+            )
+            db.collection("Notes").document(id!!).set(note)
+                .addOnSuccessListener {
+                    Toast.makeText(this, "Changes saved", Toast.LENGTH_SHORT).show()
+                }
+                .addOnFailureListener {
+                    Utils.showError(this, it.message.toString())
+                }
+        }
+
+        delete_prod.setOnClickListener {
+            // Eliminar el producto que el usuario haya seleccionado, y guardar los cambios en la base de datos
+            products.removeAt(prod_rv.getChildAdapterPosition(prod_rv.getChildAt(0)))
+            amounts.removeAt(prod_rv.getChildAdapterPosition(prod_rv.getChildAt(0)))
+            val intent = Intent(this, NotesViewActivity::class.java)
+            intent.putExtra("name", noteName)
+            intent.putExtra("subtitle", noteSubtitle)
+            intent.putExtra("products", products)
+            intent.putExtra("amounts", amounts)
+            intent.putExtra("color", color)
+            intent.putExtra("id", id)
+            intent.putExtra("iduser", userID)
+            startActivity(intent)
+            // Actualizar la base de datos
             noteName = title_tv.text.toString()
             noteSubtitle = subtitle_tv.text.toString()
             val note = hashMapOf(

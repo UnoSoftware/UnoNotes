@@ -22,8 +22,8 @@ class ProductAdapter(private val activity: Activity, private val products: Array
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val product = products[position]
         val amount = amounts[position]
-        holder.layout.product_name.text = product
-        holder.layout.amount_num.text = amount.toString()
+        holder.layout.product_name.setText(product)
+        holder.layout.amount_num.setText(amount.toString())
 
 
     }
