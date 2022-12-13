@@ -4,11 +4,14 @@ import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.card.MaterialCardView
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_notes_view.*
 import kotlinx.android.synthetic.main.activity_notes_view.subtitle_tv
@@ -17,6 +20,16 @@ import kotlinx.android.synthetic.main.activity_notes_view.title_tv
 class NotesViewActivity : AppCompatActivity() {
 
     private val db = FirebaseFirestore.getInstance()
+
+    private val auth = FirebaseAuth.getInstance()
+
+    lateinit var noteName: String
+    lateinit var noteSubtitle: String
+    lateinit var id: String
+    lateinit var color: String
+    lateinit var userID: String
+    lateinit var products: ArrayList<String>
+    lateinit var amounts: ArrayList<Int>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,14 +50,13 @@ class NotesViewActivity : AppCompatActivity() {
         }
 
         val extras = intent.extras
-        var noteName = extras!!.getString("name")
-        var noteSubtitle = extras.getString("subtitle")
-        val id = extras.getString("id")
-        val color = extras.getString("color")
-        val userID = extras.getString("iduser")
-        val products = extras.get("products") as ArrayList<String>
-        val amounts = extras.get("amounts") as ArrayList<Int>
-        val change_color_btn: ImageButton = findViewById(R.id.change_color_btn)
+        noteName = extras!!.getString("name").toString()
+        noteSubtitle = extras?.getString("subtitle").toString()
+        id = extras?.getString("id").toString()
+        color = extras?.getString("color").toString()
+        userID = extras?.getString("iduser").toString()
+        products = extras?.get("products") as ArrayList<String>
+        amounts = extras?.get("amounts") as ArrayList<Int>
         val card_vw: MaterialCardView = findViewById(R.id.CardView)
 
         card_vw.setBackgroundColor(Color.parseColor(color)) // Establece el color de la nota que esta guardado en la base de datos
@@ -81,17 +93,6 @@ class NotesViewActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        change_color_btn.setOnClickListener {
-            val intent = Intent(this, ChangeColorActivity::class.java)
-            intent.putExtra("id", id)
-            intent.putExtra("name", noteName)
-            intent.putExtra("color", color)
-            intent.putExtra("subtitle", noteSubtitle)
-            intent.putExtra("products", products)
-            intent.putExtra("amounts", amounts)
-            startActivity(intent)
-        }
-
         save_btn.setOnClickListener {
             noteName = title_tv.text.toString()
             noteSubtitle = subtitle_tv.text.toString()
@@ -107,9 +108,43 @@ class NotesViewActivity : AppCompatActivity() {
                 .addOnSuccessListener {
                     Toast.makeText(this, "Changes saved", Toast.LENGTH_SHORT).show()
                 }
-                .addOnFailureListener{
+                .addOnFailureListener {
                     Utils.showError(this, it.message.toString())
                 }
-        } 
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.note_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.share ->{
+                val intent = Intent(this, SettingsActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.delete ->{
+                db.collection("Notes").document(id).delete().
+                addOnSuccessListener {
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                }
+                    .addOnFailureListener{
+                        Utils.showError(this, it.message.toString())
+                    }
+            }
+            R.id.change_color ->{
+                val intent = Intent(this, ChangeColorActivity::class.java)
+                intent.putExtra("id", id)
+                intent.putExtra("name", noteName)
+                intent.putExtra("color", color)
+                intent.putExtra("subtitle", noteSubtitle)
+                intent.putExtra("products", products)
+                intent.putExtra("amounts", amounts)
+                startActivity(intent)
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

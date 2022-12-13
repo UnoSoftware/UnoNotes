@@ -23,10 +23,14 @@
         <entry key="..\:/Users/itsch/AndroidStudioProjects/NotesNR/UnoNotes/app/src/main/res/layout/activity_create_note.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/itsch/AndroidStudioProjects/NotesNR/UnoNotes/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/itsch/AndroidStudioProjects/NotesNR/UnoNotes/app/src/main/res/layout/activity_notes_view.xml" value="0.5" />
+        <entry key="..\:/Users/itsch/AndroidStudioProjects/NotesNR/UnoNotes/app/src/main/res/layout/activity_register.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/itsch/AndroidStudioProjects/NotesNR/UnoNotes/app/src/main/res/layout/activity_sign_in.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/itsch/AndroidStudioProjects/NotesNR/UnoNotes/app/src/main/res/layout/activity_splash_screen.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/itsch/AndroidStudioProjects/NotesNR/UnoNotes/app/src/main/res/layout/card_notes.xml" value="0.5" />
+        <entry key="..\:/Users/itsch/AndroidStudioProjects/NotesNR/UnoNotes/app/src/main/res/layout/card_notes.xml" value="0.2" />
         <entry key="..\:/Users/itsch/AndroidStudioProjects/NotesNR/UnoNotes/app/src/main/res/layout/product_layout.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/itsch/AndroidStudioProjects/NotesNR/UnoNotes/app/src/main/res/layout/w.xml" value="0.365625" />
+        <entry key="..\:/Users/itsch/AndroidStudioProjects/NotesNR/UnoNotes/app/src/main/res/menu/main_menu.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/itsch/AndroidStudioProjects/NotesNR/UnoNotes/app/src/main/res/menu/note_menu.xml" value="0.365625" />
       </map>
     </option>
   </component>

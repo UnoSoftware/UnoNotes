@@ -100,16 +100,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/title_tv" />
 
-            <ImageButton
-                android:id="@+id/change_color_btn"
-                android:layout_width="30dp"
-                android:layout_height="40dp"
-                android:background="@drawable/cambiocolor"
-                android:foreground="@drawable/cambiocolor"
-                app:layout_constraintBottom_toBottomOf="@+id/add_btn"
-                app:layout_constraintStart_toStartOf="@+id/prod_rv"
-                app:layout_constraintTop_toTopOf="@+id/add_btn" />
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/prod_rv"
                 android:layout_width="match_parent"
