@@ -28,7 +28,7 @@ class NotesViewActivity : AppCompatActivity() {
     lateinit var noteSubtitle: String
     lateinit var id: String
     lateinit var color: String
-    lateinit var userID: String
+    lateinit var userID: ArrayList<String>
     lateinit var products: ArrayList<String>
     lateinit var amounts: ArrayList<Int>
 
@@ -55,7 +55,7 @@ class NotesViewActivity : AppCompatActivity() {
         noteSubtitle = extras?.getString("subtitle").toString()
         id = extras?.getString("id").toString()
         color = extras?.getString("color").toString()
-        userID = extras?.getString("iduser").toString()
+        userID = extras?.get("iduser") as ArrayList<String>
         products = extras?.get("products") as ArrayList<String>
         amounts = extras?.get("amounts") as ArrayList<Int>
         val card_vw: MaterialCardView = findViewById(R.id.CardView)
@@ -83,6 +83,27 @@ class NotesViewActivity : AppCompatActivity() {
         add_btn.setOnClickListener {
             products.add("")
             amounts.add(1)
+            noteName = title_tv.text.toString()
+            noteSubtitle = subtitle_tv.text.toString()
+            // Guardar los cambios en los productos y cantidades
+            for (i in 0 until prod_rv.childCount) {
+                products[i] = prod_rv.getChildAt(i).product_name.text.toString()
+                amounts[i] = prod_rv.getChildAt(i).amount_num.text.toString().toInt()
+            }
+            val note = hashMapOf(
+                "Name" to noteName,
+                "Subtitle" to noteSubtitle,
+                "Products" to products,
+                "Amount" to amounts,
+                "Color" to color,
+                "UserID" to userID
+            )
+            db.collection("Notes").document(id!!).set(note)
+                .addOnSuccessListener {
+                }
+                .addOnFailureListener {
+                    Utils.showError(this, it.message.toString())
+                }
             val intent = Intent(this, NotesViewActivity::class.java)
             intent.putExtra("name", noteName)
             intent.putExtra("subtitle", noteSubtitle)
@@ -129,8 +150,12 @@ class NotesViewActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.share ->{
-                val intent = Intent(this, SettingsActivity::class.java)
-                startActivity(intent)
+                val sendIntent: Intent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    putExtra(Intent.EXTRA_TEXT, id)
+                    type = "text/plain"
+                }
+                startActivity(sendIntent)
             }
             R.id.delete ->{
                 db.collection("Notes").document(id).delete().
@@ -150,6 +175,7 @@ class NotesViewActivity : AppCompatActivity() {
                 intent.putExtra("subtitle", noteSubtitle)
                 intent.putExtra("products", products)
                 intent.putExtra("amounts", amounts)
+                intent.putExtra("iduser", userID)
                 startActivity(intent)
             }
         }

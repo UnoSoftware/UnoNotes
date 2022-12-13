@@ -53,6 +53,7 @@ class MainActivity : AppCompatActivity() {
                 val colors: MutableList<String> = mutableListOf()
                 val products: MutableList<ArrayList<String>> = mutableListOf()
                 val amounts: MutableList<ArrayList<Int>> = mutableListOf()
+                val ids: MutableList<ArrayList<String>> = mutableListOf()
                 val currentUserId = auth.currentUser?.uid
                 var T = 0
                 for (note in notes) {
@@ -63,27 +64,31 @@ class MainActivity : AppCompatActivity() {
                 for (i in 0 until T) {
                     db.collection("Notes").document(ids_documentos[i]).get()
                         .addOnSuccessListener { note ->
-                            if (note.get("UserID") == currentUserId) {
-                                ids_documentos_final.add(ids_documentos[i])
-                                names.add(note.get("Name") as String)
-                                colors.add(note.get("Color") as String)
-                                subtitles.add(note.get("Subtitle") as String)
-                                products.add(note.get("Products") as ArrayList<String>)
-                                amounts.add(note.get("Amount") as ArrayList<Int>)
-                                rv.apply {
-                                    setHasFixedSize(true)
-                                    layoutManager = LinearLayoutManager(this@MainActivity)
-                                    adapter = NoteAdapter(
-                                        this@MainActivity,
-                                        names,
-                                        subtitles,
-                                        colors,
-                                        products,
-                                        amounts,
-                                        i,
-                                        ids_documentos_final,
-                                        currentUserId.toString()
-                                    )
+                            val userIDS = note.get("UserID") as ArrayList<String>
+                            for (a in userIDS) {
+                                if (a == currentUserId) {
+                                    ids_documentos_final.add(ids_documentos[i])
+                                    names.add(note.get("Name") as String)
+                                    colors.add(note.get("Color") as String)
+                                    subtitles.add(note.get("Subtitle") as String)
+                                    products.add(note.get("Products") as ArrayList<String>)
+                                    amounts.add(note.get("Amount") as ArrayList<Int>)
+                                    ids.add(note.get("UserID") as ArrayList<String>)
+                                    rv.apply {
+                                        setHasFixedSize(true)
+                                        layoutManager = LinearLayoutManager(this@MainActivity)
+                                        adapter = NoteAdapter(
+                                            this@MainActivity,
+                                            names,
+                                            subtitles,
+                                            colors,
+                                            products,
+                                            amounts,
+                                            i,
+                                            ids_documentos_final,
+                                            ids
+                                        )
+                                    }
                                 }
                             }
                         }
@@ -102,6 +107,10 @@ class MainActivity : AppCompatActivity() {
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
+            R.id.addnote ->{
+                val intent = Intent(this, ShareActivity::class.java)
+                startActivity(intent)
+            }
             R.id.delete ->{
                 auth.signOut()
                 val intent = Intent(this, SignInActivity::class.java)

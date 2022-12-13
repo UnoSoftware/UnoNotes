@@ -13,7 +13,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.card_notes.view.*
 
 class NoteAdapter(private val activity: Activity, private val names: MutableList<String>, private val subitles: MutableList<String>, private val colors: MutableList<String>,
-                  private val products: MutableList<ArrayList<String>>, private val amounts: MutableList<ArrayList<Int>>, private val id: Int, private val idsnotas: MutableList<String>, private val currentUserId: String
+                  private val products: MutableList<ArrayList<String>>, private val amounts: MutableList<ArrayList<Int>>, private val id: Int, private val idsnotas: MutableList<String>, private val userIds: MutableList<ArrayList<String>>
 )
     : RecyclerView.Adapter<NoteAdapter.ViewHolder>() {
 
@@ -36,6 +36,7 @@ class NoteAdapter(private val activity: Activity, private val names: MutableList
         val products_temp = products[position]
         val amounts_temp = amounts[position]
         val id2 = idsnotas[position]
+        val userid = userIds[position]
 
         holder.layout.CardView.setCardBackgroundColor(Color.parseColor(color))  // Establece el color de la nota que esta guardado en la base de datos
 
@@ -50,7 +51,7 @@ class NoteAdapter(private val activity: Activity, private val names: MutableList
             intent.putExtra("products", products_temp)
             intent.putExtra("amounts", amounts_temp)
             intent.putExtra("id", id2)
-            intent.putExtra("iduser", currentUserId)
+            intent.putExtra("iduser", userid)
             activity.startActivity(intent)
         }
     }

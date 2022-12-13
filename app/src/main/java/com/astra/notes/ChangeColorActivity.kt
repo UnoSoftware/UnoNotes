@@ -34,9 +34,10 @@ class ChangeColorActivity : AppCompatActivity() {
         val extras = intent.extras
         val noteId = extras?.getString("id")
         val noteName = extras?.getString("name")
+        val userID = extras?.get("iduser") as ArrayList<String>
         val noteSubtitle = extras?.getString("subtitle")
         val products = extras?.get("products") as ArrayList<String>
-        val amounts = extras.get("amounts") as ArrayList<String>
+        val amounts = extras.get("amounts") as ArrayList<Int>
 
         Red.setOnClickListener {
             db.collection("Notes").document("$noteId").update("Color", "#CB0900")
@@ -47,7 +48,7 @@ class ChangeColorActivity : AppCompatActivity() {
                 intent.putExtra("products", products)
                 intent.putExtra("amounts", amounts)
                 intent.putExtra("color", "#CB0900")
-                intent.putExtra("id", noteId)
+                intent.putExtra("iduser", userID)
                 startActivity(intent)
             }
             .addOnFailureListener {
@@ -64,7 +65,7 @@ class ChangeColorActivity : AppCompatActivity() {
                     intent.putExtra("products", products)
                     intent.putExtra("amounts", amounts)
                     intent.putExtra("color", "#074AA3")
-                    intent.putExtra("id", noteId)
+                    intent.putExtra("iduser", userID)
                     startActivity(intent)
                 }
                 .addOnFailureListener {
@@ -81,7 +82,7 @@ class ChangeColorActivity : AppCompatActivity() {
                     intent.putExtra("products", products)
                     intent.putExtra("amounts", amounts)
                     intent.putExtra("color", "#F0D804")
-                    intent.putExtra("id", noteId)
+                    intent.putExtra("iduser", userID)
                     startActivity(intent)
                 }
                 .addOnFailureListener {
@@ -98,7 +99,7 @@ class ChangeColorActivity : AppCompatActivity() {
                     intent.putExtra("products", products)
                     intent.putExtra("amounts", amounts)
                     intent.putExtra("color", "#328A10")
-                    intent.putExtra("id", noteId)
+                    intent.putExtra("iduser", userID)
                     startActivity(intent)
                 }
                 .addOnFailureListener {
