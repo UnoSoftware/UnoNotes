@@ -53,6 +53,7 @@ class MainActivity : AppCompatActivity() {
                 val colors: MutableList<String> = mutableListOf()
                 val products: MutableList<ArrayList<String>> = mutableListOf()
                 val amounts: MutableList<ArrayList<Int>> = mutableListOf()
+                val checks: MutableList<ArrayList<Boolean>> = mutableListOf()
                 val ids: MutableList<ArrayList<String>> = mutableListOf()
                 val currentUserId = auth.currentUser?.uid
                 var T = 0
@@ -73,6 +74,9 @@ class MainActivity : AppCompatActivity() {
                                     subtitles.add(note.get("Subtitle") as String)
                                     products.add(note.get("Products") as ArrayList<String>)
                                     amounts.add(note.get("Amount") as ArrayList<Int>)
+                                    if (note.get("Checks") !== null) {
+                                        checks.add(note.get("Checks") as ArrayList<Boolean>)
+                                    }
                                     ids.add(note.get("UserID") as ArrayList<String>)
                                     rv.apply {
                                         setHasFixedSize(true)
@@ -84,6 +88,7 @@ class MainActivity : AppCompatActivity() {
                                             colors,
                                             products,
                                             amounts,
+                                            checks,
                                             i,
                                             ids_documentos_final,
                                             ids

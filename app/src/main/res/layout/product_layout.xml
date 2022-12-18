@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <CheckBox
-        android:id="@+id/checkBox"
+        android:id="@+id/product_check"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -26,10 +26,10 @@
         android:textColorHint="#040404"
         android:textSize="15sp"
         app:fontFamily="@font/c"
-        app:layout_constraintBottom_toBottomOf="@+id/checkBox"
+        app:layout_constraintBottom_toBottomOf="@+id/product_check"
         app:layout_constraintEnd_toStartOf="@+id/amount_num"
-        app:layout_constraintStart_toEndOf="@+id/checkBox"
-        app:layout_constraintTop_toTopOf="@+id/checkBox" />
+        app:layout_constraintStart_toEndOf="@+id/product_check"
+        app:layout_constraintTop_toTopOf="@+id/product_check" />
 
 
     <EditText
@@ -42,7 +42,7 @@
         android:textColorHint="#000000"
         android:textSize="15sp"
         app:fontFamily="@font/c"
-        app:layout_constraintBottom_toBottomOf="@+id/checkBox"
+        app:layout_constraintBottom_toBottomOf="@+id/product_check"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />

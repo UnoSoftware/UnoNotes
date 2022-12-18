@@ -39,6 +39,7 @@ class CreateNote : AppCompatActivity() {
             val noteSubtitle = subtitle_tv.text.toString()
             val products: ArrayList<String> = arrayListOf()
             val amount: ArrayList<Int> = arrayListOf()
+            val checks: ArrayList<Boolean> = arrayListOf()
             val users: ArrayList<String> = arrayListOf()
             currentUser?.uid?.let { it1 -> users.add(it1) }
             val note = hashMapOf(
@@ -46,6 +47,7 @@ class CreateNote : AppCompatActivity() {
                 "Subtitle" to noteSubtitle,  // Guarda la descripcion de la nota
                 "Products" to products,   // Guarda el Array de productos de la nota
                 "Amount" to amount,   // Guarda el Array de cantidades de la nota
+                "Checks" to checks, // Guarda las notas marcadas
                 "Color" to "#F88B39", // Guarda el Color por defecto para la nota
                 "UserID" to users  // Se guarda el ID del usuario que crea la nota
             )
