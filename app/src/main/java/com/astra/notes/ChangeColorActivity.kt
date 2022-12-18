@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.activity_change_color.*
+import kotlinx.android.synthetic.main.activity_settings.*
 
 class ChangeColorActivity : AppCompatActivity() {
 
@@ -18,13 +20,29 @@ class ChangeColorActivity : AppCompatActivity() {
 
         var view = findViewById<View>(R.id.LayoutChangeColor)
         var textView = findViewById<View>(R.id.textView6)
+        var viewImageDark = findViewById<View>(R.id.imageView10)
+        var viewImageLight = findViewById<View>(R.id.imageView11)
 
         if(MainActivity.globalDark){
             view.setBackgroundColor(Color.parseColor("#FF000000"))
             textView.setBackgroundColor(Color.parseColor("#FFFFFFFF"))
+            viewImageLight.setVisibility(View.GONE)
+            viewImageDark.setVisibility(View.VISIBLE)
         }else{
             view.setBackgroundColor(Color.parseColor("#FFFFFFFF"))
             textView.setBackgroundColor(Color.parseColor("#FF000000"))
+            viewImageLight.setVisibility(View.VISIBLE)
+            viewImageDark.setVisibility(View.GONE)
+        }
+
+        imageView10.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+
+        imageView11.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
 
         var Red: Button = findViewById(R.id.red_btn)

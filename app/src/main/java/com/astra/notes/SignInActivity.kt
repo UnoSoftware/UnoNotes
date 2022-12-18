@@ -28,14 +28,29 @@ class SignInActivity : AppCompatActivity() {
         setContentView(R.layout.activity_sign_in)
 
         var view = findViewById<View>(R.id.LayoutSingIn)
-        var textView = findViewById<View>(R.id.textView)
+        var textView = findViewById<TextView>(R.id.textView)
+        var textRegister = findViewById<TextView>(R.id.noaccount)
+        var textMail = findViewById<TextView>(R.id.Email)
+        var textPass = findViewById<TextView>(R.id.password)
+        var viewImageDark = findViewById<View>(R.id.imageView2)
+        var viewImageLight = findViewById<View>(R.id.imageView16)
 
         if(MainActivity.globalDark){
             view.setBackgroundColor(Color.parseColor("#FF000000"))
-            textView.setBackgroundColor(Color.parseColor("#FFFFFFFF"))
+            textView.setTextColor(Color.parseColor("#FFFFFFFF"))
+            textRegister.setTextColor(Color.parseColor("#FFFFFFFF"))
+            textMail.setTextColor(Color.parseColor("#FFFFFFFF"))
+            textPass.setTextColor(Color.parseColor("#FFFFFFFF"))
+            viewImageLight.setVisibility(View.GONE)
+            viewImageDark.setVisibility(View.VISIBLE)
         }else{
             view.setBackgroundColor(Color.parseColor("#FFFFFFFF"))
-            textView.setBackgroundColor(Color.parseColor("#FF000000"))
+            textView.setTextColor(Color.parseColor("#FF000000"))
+            textRegister.setTextColor(Color.parseColor("#FF000000"))
+            textMail.setTextColor(Color.parseColor("#FF000000"))
+            textPass.setTextColor(Color.parseColor("#FF000000"))
+            viewImageLight.setVisibility(View.VISIBLE)
+            viewImageDark.setVisibility(View.GONE)
         }
 
         email = findViewById(R.id.Email)

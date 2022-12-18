@@ -10,6 +10,8 @@ import android.widget.Switch
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatDelegate
 import com.astra.notes.MainActivity.Companion.globalDark
+import kotlinx.android.synthetic.main.activity_notes_view.*
+import kotlinx.android.synthetic.main.activity_settings.*
 
 class SettingsActivity : AppCompatActivity() {
 
@@ -18,21 +20,32 @@ class SettingsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
 
-        backButton = findViewById(R.id.backButton)
-        val btn = findViewById<Switch>(R.id.switchColor)
-
         var view = findViewById<View>(R.id.LayoutSettings)
+        val btn = findViewById<Switch>(R.id.switchColor)
+        var viewImageDark = findViewById<View>(R.id.imageView6)
+        var viewImageLight = findViewById<View>(R.id.imageView7)
+
+
         if(globalDark){
             view.setBackgroundColor(Color.parseColor("#FF000000"))
             btn.setTextColor(Color.parseColor("#FFFFFFFF"))
+            viewImageLight.setVisibility(View.GONE)
+            viewImageDark.setVisibility(View.VISIBLE)
             btn.setChecked(true)
         }else{
             view.setBackgroundColor(Color.parseColor("#FFFFFFFF"))
             btn.setTextColor(Color.parseColor("#FF000000"))
+            viewImageLight.setVisibility(View.VISIBLE)
+            viewImageDark.setVisibility(View.GONE)
             btn.setChecked(false)
         }
 
-        backButton.setOnClickListener {
+        imageView6.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+
+        imageView7.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
@@ -42,10 +55,14 @@ class SettingsActivity : AppCompatActivity() {
             if (btn.isChecked) {
                 view.setBackgroundColor(Color.parseColor("#FF000000"))
                 btn.setTextColor(Color.parseColor("#FFFFFFFF"))
+                viewImageLight.setVisibility(View.GONE)
+                viewImageDark.setVisibility(View.VISIBLE)
                 globalDark = true
             } else {
                 view.setBackgroundColor(Color.parseColor("#FFFFFFFF"))
                 btn.setTextColor(Color.parseColor("#FF000000"))
+                viewImageLight.setVisibility(View.VISIBLE)
+                viewImageDark.setVisibility(View.GONE)
                 globalDark = false
             }
         }

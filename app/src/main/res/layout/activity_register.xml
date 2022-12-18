@@ -7,32 +7,33 @@
     android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/LinearLayout"
         android:layout_width="409dp"
         android:layout_height="729dp"
+        android:background="@color/background"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/background">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/register_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="20pt"
             android:text="Registro"
             android:textColor="@color/white"
-            android:textSize="14pt"
-            android:layout_margin="20pt" />
+            android:textSize="14pt" />
 
         <TextView
             android:id="@+id/register_email_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
             android:layout_marginHorizontal="20pt"
             android:layout_marginVertical="2pt"
-            android:text="Email" />
+            android:text="Email"
+            android:textColor="@color/white" />
 
         <EditText
             android:id="@+id/register_email"
@@ -52,8 +53,8 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20pt"
             android:layout_marginVertical="2pt"
-            android:textColor="@color/white"
-            android:text="Contraseña" />
+            android:text="Contraseña"
+            android:textColor="@color/white" />
 
         <EditText
             android:id="@+id/register_password"
@@ -71,10 +72,10 @@
             android:id="@+id/register_error_message"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#ff5733"
             android:layout_marginHorizontal="20pt"
             android:text="Ha ocurrido un error de procesamiento, por favor
-vuelva a intentar el registro más tarde." />
+vuelva a intentar el registro más tarde."
+            android:textColor="#ff5733" />
 
         <Button
             android:id="@+id/register_button"
@@ -85,6 +86,17 @@ vuelva a intentar el registro más tarde." />
             android:background="#FF0000"
             android:minHeight="55dp"
             android:text="Registrarse"
+            app:backgroundTint="#FF0000" />
+
+        <Button
+            android:id="@+id/login_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20pt"
+            android:layout_marginTop="10pt"
+            android:background="#FF0000"
+            android:minHeight="55dp"
+            android:text="Inicia Sesión"
             app:backgroundTint="#FF0000" />
 
     </LinearLayout>

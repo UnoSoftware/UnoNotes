@@ -5,13 +5,13 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
+import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_notes_view.*
+import kotlinx.android.synthetic.main.activity_share.*
 
 class ShareActivity : AppCompatActivity() {
 
@@ -32,11 +32,33 @@ class ShareActivity : AppCompatActivity() {
         setContentView(R.layout.activity_share)
 
         var view = findViewById<View>(R.id.ShareView)
+        var textTitle = findViewById<TextView>(R.id.title)
+        var textView = findViewById<TextView>(R.id.id_txt)
+        var viewImageDark = findViewById<View>(R.id.imageView8)
+        var viewImageLight = findViewById<View>(R.id.imageView9)
 
         if (MainActivity.globalDark) {
             view.setBackgroundColor(Color.parseColor("#FF000000"))
+            textTitle.setTextColor(Color.parseColor("#FFFFFFFF"))
+            textView.setTextColor(Color.parseColor("#FFFFFFFF"))
+            viewImageLight.setVisibility(View.GONE)
+            viewImageDark.setVisibility(View.VISIBLE)
         } else {
             view.setBackgroundColor(Color.parseColor("#FFFFFFFF"))
+            textTitle.setTextColor(Color.parseColor("#FF000000"))
+            textView.setTextColor(Color.parseColor("#FF000000"))
+            viewImageLight.setVisibility(View.VISIBLE)
+            viewImageDark.setVisibility(View.GONE)
+        }
+
+        imageView8.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+
+        imageView9.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
 
         var add_btn = findViewById<Button>(R.id.save_btn2)
