@@ -31,6 +31,7 @@ class NotesViewActivity : AppCompatActivity() {
     lateinit var userID: ArrayList<String>
     lateinit var products: ArrayList<String>
     lateinit var amounts: ArrayList<Int>
+    lateinit var checks: ArrayList<Boolean>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,6 +59,7 @@ class NotesViewActivity : AppCompatActivity() {
         userID = extras?.get("iduser") as ArrayList<String>
         products = extras?.get("products") as ArrayList<String>
         amounts = extras?.get("amounts") as ArrayList<Int>
+        checks = extras?.get("checks") as ArrayList<Boolean>
         val card_vw: MaterialCardView = findViewById(R.id.CardView)
 
         card_vw.setBackgroundColor(Color.parseColor(color)) // Establece el color de la nota que esta guardado en la base de datos
@@ -67,7 +69,7 @@ class NotesViewActivity : AppCompatActivity() {
         prod_rv.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(this@NotesViewActivity)
-            adapter = ProductAdapter(this@NotesViewActivity, products, amounts as ArrayList<Int>) // Llama al recyclerview de los productos
+            adapter = ProductAdapter(this@NotesViewActivity, products, amounts as ArrayList<Int>, checks) // Llama al recyclerview de los productos
         }
 
         imageView4.setOnClickListener {
@@ -83,18 +85,21 @@ class NotesViewActivity : AppCompatActivity() {
         add_btn.setOnClickListener {
             products.add("")
             amounts.add(1)
+            checks.add(false)
             noteName = title_tv.text.toString()
             noteSubtitle = subtitle_tv.text.toString()
             // Guardar los cambios en los productos y cantidades
             for (i in 0 until prod_rv.childCount) {
                 products[i] = prod_rv.getChildAt(i).product_name.text.toString()
                 amounts[i] = prod_rv.getChildAt(i).amount_num.text.toString().toInt()
+                checks[i] = prod_rv.getChildAt(i).product_check.isChecked
             }
             val note = hashMapOf(
                 "Name" to noteName,
                 "Subtitle" to noteSubtitle,
                 "Products" to products,
                 "Amount" to amounts,
+                "Checks" to checks,
                 "Color" to color,
                 "UserID" to userID
             )
@@ -109,6 +114,7 @@ class NotesViewActivity : AppCompatActivity() {
             intent.putExtra("subtitle", noteSubtitle)
             intent.putExtra("products", products)
             intent.putExtra("amounts", amounts)
+            intent.putExtra("checks", checks)
             intent.putExtra("color", color)
             intent.putExtra("id", id)
             intent.putExtra("iduser", userID)
@@ -122,12 +128,14 @@ class NotesViewActivity : AppCompatActivity() {
             for (i in 0 until prod_rv.childCount) {
                 products[i] = prod_rv.getChildAt(i).product_name.text.toString()
                 amounts[i] = prod_rv.getChildAt(i).amount_num.text.toString().toInt()
+                checks[i] = prod_rv.getChildAt(i).product_check.isChecked
             }
             val note = hashMapOf(
                 "Name" to noteName,
                 "Subtitle" to noteSubtitle,
                 "Products" to products,
                 "Amount" to amounts,
+                "Checks" to checks,
                 "Color" to color,
                 "UserID" to userID
             )
@@ -175,6 +183,7 @@ class NotesViewActivity : AppCompatActivity() {
                 intent.putExtra("subtitle", noteSubtitle)
                 intent.putExtra("products", products)
                 intent.putExtra("amounts", amounts)
+                intent.putExtra("checks", checks)
                 intent.putExtra("iduser", userID)
                 startActivity(intent)
             }
